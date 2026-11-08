@@ -2,7 +2,7 @@
 
 **Instruments that run in the browser and talk to real hardware.**
 
-This organization collects educational demos and labs for working with hardware. Each project is designed to be used from a single web page. Most connect to a microcontroller over USB using the browser's built-in [Web Serial](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) API, so there is nothing to install and no server to run: open the page, plug in the board, click **Connect**. Every tool also has a **Try without hardware** mode, so you can explore it with nothing plugged in.
+This organization collects educational demos and labs for working with hardware. Each project is designed to be used from a single web page. Most connect to a microcontroller over USB using the browser's built-in [Web Serial](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) API, so there is nothing to install and no server to run: open the page, plug in the board, click **Connect**. Every hardware tool also has a **Try without hardware** mode, and some projects are pure simulations that never need a board.
 
 🌐 **Live site:** https://interactive-hardware-interfacing.github.io/ — the landing page for all demos and projects.
 
@@ -29,6 +29,12 @@ A series of hands-on demos built around pairs (or small swarms) of **Seeed XIAO 
 |---|---|---|---|
 | [**led-iv-lab**](https://github.com/interactive-hardware-interfacing/led-iv-lab) | A browser-based curve tracer for an undergraduate electronics lab. Pick one of four LEDs (red, amber, green, blue), sweep the drive voltage, and plot forward voltage vs. current live. Firmware in Arduino C++ with a CircuitPython alternative. | Adafruit ItsyBitsy M4 + lab LED board | [▶ Open](https://interactive-hardware-interfacing.github.io/led-iv-lab/) |
 
+### Simulations
+
+| Lab | What it does | Hardware | Live |
+|---|---|---|---|
+| [**intro-emf-lab**](https://github.com/interactive-hardware-interfacing/intro-emf-lab) | Fourteen interactive field simulators for an introductory electromagnetism course: Coulomb superposition, Gauss's law, boundary conditions and dielectrics, capacitance, conduction, transmission lines, Biot–Savart, inductors, and 2-D FDTD. Plain ES modules, heavy solvers in a web worker, every result reproducible from the page URL. | None | [▶ Open](https://interactive-hardware-interfacing.github.io/intro-emf-lab/) |
+
 ### Site
 
 | Repo | Purpose |
@@ -42,11 +48,11 @@ A series of hands-on demos built around pairs (or small swarms) of **Seeed XIAO 
 - **One page per instrument.** Each tool is a self-contained HTML/JS page in its own repository, served by GitHub Pages. No build step, no framework, no backend.
 - **Plain-text protocols.** Boards speak simple line-based commands (e.g. `SET 2.4`, `MEAS`), so every instrument also works from a serial terminal or a Python script. Each repo documents its protocol in `PROTOCOL.md`.
 - **Browser APIs, not drivers.** Web Serial (and WebUSB where needed) replace per-OS driver installs. Chrome or Edge on a desktop/laptop is required for hardware mode; the simulator mode runs in any browser.
-- **Firmware included.** Each repo ships the microcontroller code (mostly CircuitPython) plus wiring diagrams in `wiring/`.
+- **Firmware included.** Every hardware repo ships the microcontroller code (mostly CircuitPython) plus wiring diagrams in `wiring/`.
 
 ## Running locally
 
-Web Serial requires a secure context, so pages must be served from `https://` or `localhost` (ES modules also won't load from `file://`). From any repo:
+Web Serial requires a secure context and ES modules won't load from `file://`, so pages must be served from `https://` or `localhost`. From any repo:
 
 ```bash
 python -m http.server 8000
